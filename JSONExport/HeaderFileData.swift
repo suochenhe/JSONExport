@@ -24,6 +24,15 @@ class HeaderFileData{
     var typesNeedSpecialDefinition : [String]!
     var utilityMethodSignatures : [String]!
     
+    /* ------ Selen --------*/
+    var instanceVarWithCopyDefinition : String!
+    var typesNeedCopyDefinition : [String]!
+    
+    var instanceVarWithCopyArrayDefinition : String!
+    var typeArrayDefinition : String!
+    
+    /* ------ Selen --------*/
+    
     
     /**
     * Instantiate the instance using the passed dictionary values to set the properties values
@@ -45,6 +54,13 @@ class HeaderFileData{
         typesNeedSpecialDefinition = dictionary["typesNeedSpecialDefinition"] as? [String]
         utilityMethodSignatures = dictionary["utilityMethodSignatures"] as? [String]
         
+        /* ------ Selen --------*/
+        instanceVarWithCopyDefinition = dictionary["instanceVarWithCopyDefinition"] as? String
+        typesNeedCopyDefinition = dictionary["typesNeedCopyDefinition"] as? [String]
+        
+        instanceVarWithCopyArrayDefinition = dictionary["instanceVarWithCopyArrayDefinition"] as? String
+        typeArrayDefinition = dictionary["typeArrayDefinition"] as? String
+        /* ------ Selen --------*/
     }
     
 }

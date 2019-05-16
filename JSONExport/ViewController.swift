@@ -98,6 +98,14 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         setLanguagesSelection()
         loadLastSelectedLanguage()
         updateUIFieldsForSelectedLanguage()
+        
+        /* ------ Selen --------*/
+        generateConstructors.state = NSControl.StateValue.off;
+        generateUtilityMethods.state = NSControl.StateValue.off;
+        /* ------ Selen --------*/
+        
+        languagesPopup.selectItem(withTitle: "ObjectiveC - YYModel")
+//        sourceText.insertText("{ \"name_big\" : \"selen\",\"list\" : [\"a\",\"b\",\"c\"],\"nums\" : [1,2,3],\"customList\" : [{\"age\":18,\"name\":\"name1\"},{\"age\":20,\"name\":\"name2\"}]}");
     }
     
     /**

@@ -78,7 +78,24 @@ class Property : Equatable{
     /**
     If this property is an array, this property should contain the type for its elements
     */
-    var elementsType  = ""
+    /* ------ Selen --------*/
+    private  var _elementsType = ""
+    var elementsType: String{
+        set{
+            _elementsType = newValue
+        }
+        
+        get{
+            if self.isArray && self.elementsAreOfCustomType {
+                var elementsTypeName = ""
+                elementsTypeName += _elementsType
+                elementsTypeName += "Model"
+                return elementsTypeName
+            }
+            return _elementsType
+        }
+    }
+    /* ------ Selen --------*/
     
     /**
     For array properties, depetermines if the elements type is a custom type
@@ -92,12 +109,19 @@ class Property : Equatable{
     {
         var string : String!
         if forHeaderFile{
-            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
+            /* ------ Selen --------*/
+            if lang.headerFileData.instanceVarWithCopyArrayDefinition != nil && lang.headerFileData.typeArrayDefinition != nil && lang.headerFileData.typeArrayDefinition.elementsEqual(type){
+                string = lang.headerFileData.instanceVarWithCopyArrayDefinition
+            }
+            else if lang.headerFileData.instanceVarWithCopyDefinition != nil && lang.headerFileData.typesNeedCopyDefinition.index(of: type) != nil{
+                string = lang.headerFileData.instanceVarWithCopyDefinition
+            }
+            /* ------ Selen --------*/
+            else if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
                 string = lang.headerFileData.instanceVarDefinition
             }
-            
             
         }else{
             if lang.instanceVarWithSpeicalDefinition != nil && lang.typesNeedSpecialDefinition.index(of: type) != nil{
@@ -110,6 +134,7 @@ class Property : Equatable{
         string = string.replacingOccurrences(of: varType, with: type)
         string = string.replacingOccurrences(of: varName, with: nativeName)
         string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
+        string = string.replacingOccurrences(of: elementType, with: self.elementsType)
         return string
     }
     

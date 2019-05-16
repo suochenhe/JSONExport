@@ -114,6 +114,14 @@ class FileRepresenter{
         //start the model content body
         fileContent += "\(lang.modelStart)"
         
+        
+        /* ------ Selen --------*/
+        if isObjectiveC_iOS_YYModel() {
+            appendModelCustomPropertyMapper()
+            appendModelContainerPropertyGenericClassMapper()
+        }
+        /* ------ Selen --------*/
+        
         appendProperties()
         appendSettersAndGetters()
         appendInitializers()
@@ -123,6 +131,12 @@ class FileRepresenter{
         fileContent += lang.modelEnd
         return fileContent
     }
+    
+    /* ------ Selen --------*/
+    func isObjectiveC_iOS_YYModel() -> Bool {
+        return lang.displayLangName.elementsEqual("ObjectiveC - YYModel")
+    }
+    /* ------ Selen --------*/
     
     /**
     Appneds the firstLine value (if any) to the fileContent if the lang.supportsFirstLineStatement is true
@@ -160,7 +174,12 @@ class FileRepresenter{
             fileContent += "\n"
         }
         for property in properties{
-            fileContent += property.toConstVar(className)
+            /* ------ Selen --------*/
+            let constName = property.toConstVar(className)
+            if !isObjectiveC_iOS_YYModel() {
+                fileContent += constName
+            }
+            /* ------ Selen --------*/
         }
     }
     
@@ -240,6 +259,78 @@ class FileRepresenter{
             }
         }
     }
+    
+    /* ------ Selen --------*/
+//    + (NSDictionary <NSString *, id> *)modelCustomPropertyMapper
+    func appendModelCustomPropertyMapper()
+    {
+        let selectorName = "+ (NSDictionary <NSString *, id> *)modelCustomPropertyMapper"
+        let space = "             "
+        
+        fileContent += "\n"
+        fileContent += selectorName
+        fileContent += " {\n"
+        fileContent += "    return @{ \n"
+        var index = 0
+        for property in properties{
+            index += 1
+            fileContent += space
+            fileContent += "@\""
+            fileContent += property.nativeName
+            fileContent += "\" : @\""
+            fileContent += property.jsonName
+            fileContent += "\""
+            if index != properties.count {
+                fileContent += ","
+            }
+            fileContent += "\n"
+        }
+        fileContent += space
+        fileContent += "};\n"
+        fileContent += "}"
+        fileContent += "\n"
+    }
+    
+    //    + (NSDictionary <NSString *, id> *)modelContainerPropertyGenericClass
+    func appendModelContainerPropertyGenericClassMapper()
+    {
+        var arrayCustomProperties : [Property] = [Property]()
+        for property in properties {
+            if property.isArray && property.elementsAreOfCustomType{
+                arrayCustomProperties.append(property)
+            }
+        }
+        
+        if arrayCustomProperties.count == 0 {
+            return
+        }
+        
+        let selectorName = "+ (NSDictionary <NSString *, id> *)modelContainerPropertyGenericClass"
+        let space = "             "
+        
+        fileContent += "\n"
+        fileContent += selectorName
+        fileContent += " {\n"
+        fileContent += "    return @{ \n"
+        var index = 0
+        for property in arrayCustomProperties{
+            index += 1
+            fileContent += space
+            fileContent += "@\""
+            fileContent += property.nativeName
+            fileContent += "\" : ["
+            fileContent += property.elementsType
+            fileContent += " class]"
+            if index != arrayCustomProperties.count {
+                fileContent += ","
+            }
+            fileContent += "\n"
+        }
+        fileContent += space
+        fileContent += "};\n"
+        fileContent += "}"
+    }
+    /* ------ Selen --------*/
     
     /**
     Appends all the properties using the Property.toString(forHeaderFile: false) method
