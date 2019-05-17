@@ -1,3 +1,12 @@
+中文简易教程 
+==========
+1.下载源码，运行；  
+2.会在Products文件中生成JSONEExport.app文件；       
+3.打开app，下方设置modelName，在右下角选择 ObjectiveC - YYModel 或 ObjectiveC - MJExtension 即可生成对应的带映射的model文件;  
+4.生成的关联model的名称为简易名称，检查是否和已有模型重复，或者名称冲突，自行修改。
+       
+可将.app文件放入Finder应用程序文件夹，以便之后可以不通过运行代码，在启动台中快捷打开。
+
 JSONExport
 ==========
 JSONExport is a desktop application for Mac OS X written in Swift. 
