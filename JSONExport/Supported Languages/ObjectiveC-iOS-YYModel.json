@@ -186,8 +186,8 @@
     "typesNeedCopyDefinition": [
         "NSString"
     ],
-    "instanceVarWithCopyArrayDefinition": "@property (nonatomic, copy) <!VarType!><<!ElementType!> *> *<!VarName!>;\n",
-    "typeArrayDefinition": "NSArray"
+    "immutableArrayDefinition": "@property (nonatomic, copy) <!VarType!><<!ElementType!> *> *<!VarName!>;\n",
+    "mutableArrayDefinition"  : "@property (nonatomic, strong) <!VarType!><<!ElementType!> *> *<!VarName!>;\n"
   },
   "fileExtension": "m",
   "arrayType": "NSArray",
@@ -204,5 +204,9 @@
   "supportsFirstLineStatement": "false",
   "modelEnd": "@end",
   "staticImports": "",
-  "importHeaderFile": "#import \"<!ModelName!>.h\"\n"
+  "importHeaderFile": "#import \"<!ModelName!>.h\"\n",
+  "author" : {
+      "name" : "suochenhe",
+      "website" : "https://github.com/suochenhe/JSONExport"
+  }
 }

@@ -110,6 +110,12 @@ class LangModel{
         }
 	}
 
+    
+    /* ------ Selen --------*/
+    func isObjectiveC_iOS_YYModel() -> Bool {
+        return self.displayLangName.elementsEqual("ObjectiveC - YYModel")
+    }
+    /* ------ Selen --------*/
 	
 
 }

@@ -109,18 +109,34 @@ class Property : Equatable{
     {
         var string : String!
         if forHeaderFile{
-            /* ------ Selen --------*/
-            if lang.headerFileData.instanceVarWithCopyArrayDefinition != nil && lang.headerFileData.typeArrayDefinition != nil && lang.headerFileData.typeArrayDefinition.elementsEqual(type){
-                string = lang.headerFileData.instanceVarWithCopyArrayDefinition
-            }
-            else if lang.headerFileData.instanceVarWithCopyDefinition != nil && lang.headerFileData.typesNeedCopyDefinition.index(of: type) != nil{
-                string = lang.headerFileData.instanceVarWithCopyDefinition
-            }
-            /* ------ Selen --------*/
-            else if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
+            if lang.headerFileData.instanceVarWithSpeicalDefinition != nil && lang.headerFileData.typesNeedSpecialDefinition.index(of: type) != nil{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
-                string = lang.headerFileData.instanceVarDefinition
+                /* ------ Selen --------*/
+                if lang.isObjectiveC_iOS_YYModel(){
+                    if self.isArray {
+                        if type.contains("NSMutable") {
+                            if (elementsAreOfCustomType){
+                                string = lang.headerFileData.mutableArrayDefinition
+                            }else{
+                                string = lang.headerFileData.instanceVarDefinition
+                            }
+                        }else{
+                            if (elementsAreOfCustomType){
+                                string = lang.headerFileData.immutableArrayDefinition
+                            }else{
+                                string = lang.headerFileData.instanceVarWithCopyDefinition
+                            }
+                        }
+                    }else if lang.headerFileData.instanceVarWithCopyDefinition != nil && lang.headerFileData.typesNeedCopyDefinition.index(of: type) != nil{
+                        string = lang.headerFileData.instanceVarWithCopyDefinition
+                    }else{
+                        string = lang.headerFileData.instanceVarDefinition
+                    }
+                    /* ------ Selen --------*/
+                }else{
+                    string = lang.headerFileData.instanceVarDefinition
+                }
             }
             
         }else{
@@ -134,7 +150,9 @@ class Property : Equatable{
         string = string.replacingOccurrences(of: varType, with: type)
         string = string.replacingOccurrences(of: varName, with: nativeName)
         string = string.replacingOccurrences(of: jsonKeyName, with: jsonName)
+        /* ------ Selen --------*/
         string = string.replacingOccurrences(of: elementType, with: self.elementsType)
+        /* ------ Selen --------*/
         return string
     }
     

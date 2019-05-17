@@ -28,8 +28,8 @@ class HeaderFileData{
     var instanceVarWithCopyDefinition : String!
     var typesNeedCopyDefinition : [String]!
     
-    var instanceVarWithCopyArrayDefinition : String!
-    var typeArrayDefinition : String!
+    var immutableArrayDefinition : String!
+    var mutableArrayDefinition : String!
     
     /* ------ Selen --------*/
     
@@ -58,8 +58,8 @@ class HeaderFileData{
         instanceVarWithCopyDefinition = dictionary["instanceVarWithCopyDefinition"] as? String
         typesNeedCopyDefinition = dictionary["typesNeedCopyDefinition"] as? [String]
         
-        instanceVarWithCopyArrayDefinition = dictionary["instanceVarWithCopyArrayDefinition"] as? String
-        typeArrayDefinition = dictionary["typeArrayDefinition"] as? String
+        immutableArrayDefinition = dictionary["immutableArrayDefinition"] as? String
+        mutableArrayDefinition = dictionary["mutableArrayDefinition"] as? String
         /* ------ Selen --------*/
     }
     

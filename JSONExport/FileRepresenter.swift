@@ -116,7 +116,7 @@ class FileRepresenter{
         
         
         /* ------ Selen --------*/
-        if isObjectiveC_iOS_YYModel() {
+        if lang.isObjectiveC_iOS_YYModel() {
             appendModelCustomPropertyMapper()
             appendModelContainerPropertyGenericClassMapper()
         }
@@ -131,12 +131,6 @@ class FileRepresenter{
         fileContent += lang.modelEnd
         return fileContent
     }
-    
-    /* ------ Selen --------*/
-    func isObjectiveC_iOS_YYModel() -> Bool {
-        return lang.displayLangName.elementsEqual("ObjectiveC - YYModel")
-    }
-    /* ------ Selen --------*/
     
     /**
     Appneds the firstLine value (if any) to the fileContent if the lang.supportsFirstLineStatement is true
@@ -176,7 +170,7 @@ class FileRepresenter{
         for property in properties{
             /* ------ Selen --------*/
             let constName = property.toConstVar(className)
-            if !isObjectiveC_iOS_YYModel() {
+            if !lang.isObjectiveC_iOS_YYModel() {
                 fileContent += constName
             }
             /* ------ Selen --------*/
