@@ -112,8 +112,16 @@ class LangModel{
 
     
     /* ------ Selen --------*/
+    func needAddMapper() -> Bool {
+        return self.isObjectiveC_iOS_YYModel() || self.isObjectiveC_iOS_MJExtension()
+    }
+    
     func isObjectiveC_iOS_YYModel() -> Bool {
         return self.displayLangName.elementsEqual("ObjectiveC - YYModel")
+    }
+    
+    func isObjectiveC_iOS_MJExtension() -> Bool {
+        return self.displayLangName.elementsEqual("ObjectiveC - MJExtension")
     }
     /* ------ Selen --------*/
 	

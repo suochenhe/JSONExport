@@ -113,7 +113,7 @@ class Property : Equatable{
                 string = lang.headerFileData.instanceVarWithSpeicalDefinition
             }else{
                 /* ------ Selen --------*/
-                if lang.isObjectiveC_iOS_YYModel(){
+                if lang.needAddMapper(){
                     if self.isArray {
                         if type.contains("NSMutable") {
                             if (elementsAreOfCustomType){

@@ -116,7 +116,7 @@ class FileRepresenter{
         
         
         /* ------ Selen --------*/
-        if lang.isObjectiveC_iOS_YYModel() {
+        if lang.needAddMapper() {
             appendModelCustomPropertyMapper()
             appendModelContainerPropertyGenericClassMapper()
         }
@@ -170,7 +170,7 @@ class FileRepresenter{
         for property in properties{
             /* ------ Selen --------*/
             let constName = property.toConstVar(className)
-            if !lang.isObjectiveC_iOS_YYModel() {
+            if !lang.needAddMapper() {
                 fileContent += constName
             }
             /* ------ Selen --------*/
@@ -258,7 +258,13 @@ class FileRepresenter{
 //    + (NSDictionary <NSString *, id> *)modelCustomPropertyMapper
     func appendModelCustomPropertyMapper()
     {
-        let selectorName = "+ (NSDictionary <NSString *, id> *)modelCustomPropertyMapper"
+        var selectorName = ""
+        if lang.isObjectiveC_iOS_YYModel() {
+            selectorName = "+ (NSDictionary <NSString *, id> *)modelCustomPropertyMapper"
+        }else{
+            selectorName = "+ (NSDictionary *)mj_replacedKeyFromPropertyName"
+        }
+        
         let space = "             "
         
         fileContent += "\n"
@@ -299,7 +305,13 @@ class FileRepresenter{
             return
         }
         
-        let selectorName = "+ (NSDictionary <NSString *, id> *)modelContainerPropertyGenericClass"
+        var selectorName = ""
+        if lang.isObjectiveC_iOS_YYModel() {
+            selectorName = "+ (NSDictionary <NSString *, id> *)modelContainerPropertyGenericClass"
+        }else{
+            selectorName = "+ (NSDictionary *)mj_objectClassInArray"
+        }
+        
         let space = "             "
         
         fileContent += "\n"
