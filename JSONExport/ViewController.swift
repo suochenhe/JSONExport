@@ -105,7 +105,7 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         /* ------ Selen --------*/
         
         languagesPopup.selectItem(withTitle: "ObjectiveC - YYModel")
-        sourceText.insertText("{ \"name_big\" : \"selen\",\"list\" : [\"a\",\"b\",\"c\"],\"nums\" : [1,2,3],\"customList\" : [{\"age\":18,\"name\":\"name1\"},{\"age\":20,\"name\":\"name2\"}],\"my_custom\":{\"property1\":\"value1\",\"property2\":\"value2\"}}");
+        sourceText.insertText("{ \"name_big\" : \"selen\",\"list\" : [\"a\",\"b\",\"c\"],\"nums\" : [1,2,3],\"customList\" : [{\"age\":18,\"name\":\"name1\"},{\"age\":20,\"name\":\"name2\"}],\"my_custom\":{\"property1\":\"value1\",\"property2\":\"value2\"},\"num\" : 10}");
     }
     
     /**

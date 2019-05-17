@@ -182,12 +182,12 @@
     "instanceVarWithSpeicalDefinition": "@property (nonatomic, assign) <!VarType!> <!VarName!>;\n",
     "staticImports": "#import <UIKit/UIKit.h>",
     
-    "instanceVarWithCopyDefinition": "@property (nonatomic, copy) <!VarType!> *<!VarName!>;\n",
+    "instanceVarWithCopyDefinition": "@property (nonatomic,   copy) <!VarType!> *<!VarName!>;\n",
     "typesNeedCopyDefinition": [
         "NSString"
     ],
-    "immutableArrayDefinition": "@property (nonatomic, copy) <!VarType!><<!ElementType!> *> *<!VarName!>;\n",
-    "mutableArrayDefinition"  : "@property (nonatomic, strong) <!VarType!><<!ElementType!> *> *<!VarName!>;\n"
+    "immutableArrayDefinition": "@property (nonatomic,   copy) <!VarType!> <<!ElementType!> *> *<!VarName!>;\n",
+    "mutableArrayDefinition"  : "@property (nonatomic, strong) <!VarType!> <<!ElementType!> *> *<!VarName!>;\n"
   },
   "fileExtension": "m",
   "arrayType": "NSArray",
